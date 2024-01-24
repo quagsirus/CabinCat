@@ -85,4 +85,12 @@ public class Cat : MonoBehaviour
         heldItem = item;
         return true;
     }
+
+    public bool GiveItem()
+    {
+        if (heldItem == null) return false;
+        Destroy(heldItem.gameObject);
+        heldItem = null;
+        return true;
+    }
 }

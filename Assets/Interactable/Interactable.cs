@@ -19,7 +19,7 @@ public class Interactable : MonoBehaviour
                 throw new ArgumentOutOfRangeException();
             case InteractTypes.Item:
                 Debug.Log("item");
-                if (Globals.Instance.cat.HoldItem(transform))
+                if (Globals.Instance.cat.HoldItem(transform.parent))
                 {
                     collider.enabled = false;
                     OnTriggerExit(null);
@@ -27,6 +27,11 @@ public class Interactable : MonoBehaviour
                 break;
             case InteractTypes.OldMan:
                 Debug.Log("man");
+                if (Globals.Instance.cat.GiveItem())
+                {
+                    Debug.Log("woah cool brick bro");
+                }
+                else Debug.Log("Find me a brick or die");
                 break;
         }
     }
