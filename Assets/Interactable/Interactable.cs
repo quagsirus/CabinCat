@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -30,9 +31,9 @@ public class Interactable : MonoBehaviour
                 Debug.Log("man");
                 if (Globals.Instance.cat.GiveItem())
                 {
-                    Debug.Log("woah cool brick bro");
+                    Globals.Instance.man.SetText("Thanks for the brick lil feller");
                 }
-                else Debug.Log("Find me a brick or die");
+                else Globals.Instance.man.SetText("I have a longing for bricks");
                 break;
         }
     }

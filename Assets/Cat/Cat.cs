@@ -71,7 +71,7 @@ public class Cat : MonoBehaviour
     {
         moveLocation = (input.freeroam.Movement.ReadValue<Vector2>().x * -transform.forward) +
             (input.freeroam.Movement.ReadValue<Vector2>().y * transform.right);
-        inputRotation += (input.freeroam.Look.ReadValue<Vector2>());
+        //inputRotation += (input.freeroam.Look.ReadValue<Vector2>());
 
         //targetCameraRotation *= Quaternion.Euler(0, inputRotation.x, inputRotation.y);
         //camRb.transform.rotation = Quaternion.Slerp(camRb.transform.rotation, targetCameraRotation, Time.deltaTime * 2);
