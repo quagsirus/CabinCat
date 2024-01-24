@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -80,6 +78,7 @@ public class Cat : MonoBehaviour
         //camRb.AddForceAtPosition(right * inputRotation.x * Time.fixedDeltaTime * lookSpeed, camRb.transform.position + forward);
 
         camRb.AddTorque(0, inputRotation.x * Time.fixedDeltaTime * lookSpeed, 0, ForceMode.Acceleration);
+        camRb.AddForce(0, inputRotation.y * Time.fixedDeltaTime * lookSpeed, 0, ForceMode.Acceleration);
 
         inputRotation = Vector2.zero;
     }
