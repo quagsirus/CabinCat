@@ -62,8 +62,26 @@ public class Cat : MonoBehaviour
         //camRb.transform.rotation.Set(0f, camRb.transform.rotation.y, camRb.transform.rotation.z, camRb.transform.rotation.w);
         
         //camRb.angularVelocity += (lookSpeed * Time.fixedDeltaTime * new Vector3(0, inputRotation.x, inputRotation.y));
-        var direction = camRb.transform.up * inputRotation.x + camRb.transform.right * inputRotation.y;
+        //var direction = camRb.transform.up * inputRotation.x + camRb.transform.right * inputRotation.y;
         //camRb.MoveRotation(camRb.rotation * Quaternion.LookRotation(direction));
+        //camRb.AddTorque(0, inputRotation.x, inputRotation.y);
+
+        // code to rotate camera around player based on mouse movement using rigidbody
+        //camRb.MoveRotation(Quaternion.Euler(0, inputRotation.x + camRb.rotation.y, inputRotation.y + camRb.rotation.z));
+        //camRb.AddTorque(camRb.transform.InverseTransformDirection(0, inputRotation.x, inputRotation.y), ForceMode.Acceleration);
+        var forward = camRb.transform.forward;
+        forward.y = 0;
+        forward.Normalize();
+        var right = camRb.transform.right;
+        right.y = 0;
+        right.Normalize();
+
+
+
+        //camRb.AddForceAtPosition(right * inputRotation.x * Time.fixedDeltaTime * lookSpeed, camRb.transform.position + forward);
+
+        camRb.AddTorque(0, inputRotation.x * Time.fixedDeltaTime * lookSpeed, 0, ForceMode.Acceleration);
+
         inputRotation = Vector2.zero;
     }
 
