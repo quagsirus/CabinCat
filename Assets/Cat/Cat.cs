@@ -12,6 +12,8 @@ public class Cat : MonoBehaviour
     [SerializeField] int lookSpeed = 10;
     [SerializeField] Camera cam;
     [SerializeField] Rigidbody camRb;
+    [SerializeField] Transform mouthPosition;
+    [SerializeField] private Transform heldItem;
     Vector3 moveLocation;
     Vector2 inputRotation;
     Quaternion targetCameraRotation;
@@ -21,6 +23,11 @@ public class Cat : MonoBehaviour
         input = new();
         input.freeroam.Jump.performed += Jump;
         
+    }
+
+    void Start()
+    {
+        Globals.Instance.cat = this;
     }
 
     void Jump(InputAction.CallbackContext _)
@@ -56,7 +63,7 @@ public class Cat : MonoBehaviour
         
         //camRb.angularVelocity += (lookSpeed * Time.fixedDeltaTime * new Vector3(0, inputRotation.x, inputRotation.y));
         var direction = camRb.transform.up * inputRotation.x + camRb.transform.right * inputRotation.y;
-        camRb.MoveRotation(camRb.rotation * Quaternion.LookRotation(direction));
+        //camRb.MoveRotation(camRb.rotation * Quaternion.LookRotation(direction));
         inputRotation = Vector2.zero;
     }
 
@@ -68,5 +75,14 @@ public class Cat : MonoBehaviour
 
         //targetCameraRotation *= Quaternion.Euler(0, inputRotation.x, inputRotation.y);
         //camRb.transform.rotation = Quaternion.Slerp(camRb.transform.rotation, targetCameraRotation, Time.deltaTime * 2);
+    }
+
+    public bool HoldItem(Transform item)
+    {
+        if (heldItem != null) return false;
+        item.SetParent(mouthPosition);
+        item.position = mouthPosition.position;
+        heldItem = item;
+        return true;
     }
 }

@@ -53,6 +53,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""559aaf14-b333-4736-a06f-8524fd964901"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -143,6 +152,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e6c79ee3-14e7-4bd9-ad34-8cadc7788a3c"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Default Scheme"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -160,6 +180,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_freeroam_Movement = m_freeroam.FindAction("Movement", throwIfNotFound: true);
         m_freeroam_Jump = m_freeroam.FindAction("Jump", throwIfNotFound: true);
         m_freeroam_Look = m_freeroam.FindAction("Look", throwIfNotFound: true);
+        m_freeroam_Interact = m_freeroam.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -224,6 +245,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_freeroam_Movement;
     private readonly InputAction m_freeroam_Jump;
     private readonly InputAction m_freeroam_Look;
+    private readonly InputAction m_freeroam_Interact;
     public struct FreeroamActions
     {
         private @GameInput m_Wrapper;
@@ -231,6 +253,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_freeroam_Movement;
         public InputAction @Jump => m_Wrapper.m_freeroam_Jump;
         public InputAction @Look => m_Wrapper.m_freeroam_Look;
+        public InputAction @Interact => m_Wrapper.m_freeroam_Interact;
         public InputActionMap Get() { return m_Wrapper.m_freeroam; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -249,6 +272,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
         }
 
         private void UnregisterCallbacks(IFreeroamActions instance)
@@ -262,6 +288,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
         }
 
         public void RemoveCallbacks(IFreeroamActions instance)
@@ -293,5 +322,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }
