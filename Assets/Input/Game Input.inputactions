@@ -1,5 +1,5 @@
 {
-    "name": "Game Controls",
+    "name": "Game Input",
     "maps": [
         {
             "name": "freeroam",
@@ -11,6 +11,24 @@
                     "id": "6767bcaa-a277-494b-9306-ecb5ac60b4de",
                     "expectedControlType": "Vector2",
                     "processors": "NormalizeVector2",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "0d47385d-d62d-4d3e-96a9-27bb8c2c8223",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Look",
+                    "type": "Value",
+                    "id": "55e4d371-3dd6-4df8-a2cb-1748f787cdef",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
                 }
@@ -81,6 +99,28 @@
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "1457048d-a67f-4a68-b4b5-33bae43c3839",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Default Scheme",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f586806d-2cca-4563-b749-269e11f4f18e",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Default Scheme",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }
