@@ -6,6 +6,7 @@ using UnityEngine;
 public sealed class Globals
 {
     public Cat cat;
+    public Camera cam;
     public static Globals Instance => Nested.Instance;
 
     private class Nested

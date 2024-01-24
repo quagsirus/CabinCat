@@ -10,6 +10,7 @@ public class Interactable : MonoBehaviour
     [SerializeField] private Collider collider;
     GameInput input;
     [SerializeField] private InteractTypes interactType = InteractTypes.Item;
+    [SerializeField] private Transform promptTransform;
 
     void Interact(InputAction.CallbackContext callbackContext)
     {
@@ -39,6 +40,7 @@ public class Interactable : MonoBehaviour
     void Awake()
     {
         input = new GameInput();
+        if (promptTransform != null) promptTransform.gameObject.SetActive(false);
     }
 
     void OnEnable()
@@ -56,6 +58,7 @@ public class Interactable : MonoBehaviour
         {
             Debug.Log("Entered");
             input.freeroam.Interact.performed += Interact;
+            if (promptTransform != null) promptTransform.gameObject.SetActive(true);
         }
     }
 
@@ -65,6 +68,7 @@ public class Interactable : MonoBehaviour
         {
             Debug.Log("Exited");
             input.freeroam.Interact.performed -= Interact;
+            if (promptTransform != null) promptTransform.gameObject.SetActive(false);
         }
     }
 
