@@ -98,6 +98,8 @@ public class Cat : MonoBehaviour
         if (heldItem != null) return false;
         item.SetParent(mouthPosition);
         item.position = mouthPosition.position;
+        var rotateScript = item.GetComponent<RotateObject>();
+        if (rotateScript != null) rotateScript.Cancel();
         heldItem = item;
         return true;
     }

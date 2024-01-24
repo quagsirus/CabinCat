@@ -9,7 +9,7 @@ public class Man : MonoBehaviour
     [SerializeField] TextMeshPro textDisplay;
     public bool displayingText = false;
     [SerializeField] float textDisplayLength = 5f;
-    float textDuration;
+    [SerializeField] float textDuration;
 
     void Start()
     {
@@ -22,12 +22,18 @@ public class Man : MonoBehaviour
         Debug.Log("ass");
         if (!displayingText) {
         StartCoroutine(UpdateText(text));
+        StopCoroutine(HideTextDelay());
         StartCoroutine(HideTextDelay());
         }
     }
 
     public IEnumerator HideTextDelay()
     {
+        if (textDisplay.enabled)
+        {
+            textDuration = textDisplayLength;
+            yield break;
+        }
         textDuration = textDisplayLength;
         textDisplay.enabled = true;
         while (textDuration > 0)
