@@ -10,7 +10,6 @@ public class Cat : MonoBehaviour
     [SerializeField] int moveSpeed = 10;
     [SerializeField] int jumpHeight = 10;
     [SerializeField] int lookSpeed = 10;
-    [SerializeField] Camera cam;
     [SerializeField] Rigidbody camRb;
     [SerializeField] Transform mouthPosition;
     [SerializeField] private Transform heldItem;
