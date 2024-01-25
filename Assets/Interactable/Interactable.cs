@@ -4,10 +4,8 @@ using UnityEngine.InputSystem;
 
 public class Interactable : MonoBehaviour
 {
-    [SerializeField] private readonly InteractTypes interactType = InteractTypes.Item;
-
+    [SerializeField] private InteractTypes interactType = InteractTypes.Item;
     [SerializeField] private Collider collider;
-    private GameInput input;
     [SerializeField] private Transform promptTransform;
 
     private void Interact(InputAction.CallbackContext callbackContext)
@@ -17,7 +15,7 @@ public class Interactable : MonoBehaviour
             case InteractTypes.Undefined:
                 throw new ArgumentOutOfRangeException();
             case InteractTypes.Item:
-                Debug.Log("item");
+                Debug.Log("INFO: Cat Interacted With Item");
                 if (Globals.Instance.Cat.HoldItem(transform.parent))
                 {
                     collider.enabled = false;
@@ -26,37 +24,46 @@ public class Interactable : MonoBehaviour
 
                 break;
             case InteractTypes.OldMan:
-                Debug.Log("man");
+                Debug.Log("INFO: Cat Interacted With Man");
                 Globals.Instance.Man.SetText(Globals.Instance.Cat.GiveItem()
                     ? "Thanks for the brick lil feller"
                     : "I have a longing for bricks");
+                break;
+            case InteractTypes.Telescope:
+                Debug.Log("INFO: Cat Interacted With Telescope");
+                Globals.Instance.InteractedWithTelescope();
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
     }
 
+    private void TelescopeActivated()
+    {
+        Debug.Log("TelescopeActivated");
+    }
+
     private void Awake()
     {
-        input = new GameInput();
+        Globals.Instance.Input = new GameInput();
         if (promptTransform != null) promptTransform.gameObject.SetActive(false);
     }
 
     private void OnEnable()
     {
-        input.freeroam.Enable();
+        Globals.Instance.TelescopeActivate += TelescopeActivated;
     }
 
     private void OnDisable()
     {
-        input.freeroam.Disable();
+        Globals.Instance.TelescopeActivate -= TelescopeActivated;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Cat")) return;
-        Debug.Log("Entered");
-        input.freeroam.Interact.performed += Interact;
+        Debug.Log("INFO: Entered Trigger Zone Of " + transform.parent.gameObject.name);
+        Globals.Instance.Input.freeroam.Interact.performed += Interact;
         if (promptTransform != null) promptTransform.gameObject.SetActive(true);
     }
 
@@ -64,8 +71,8 @@ public class Interactable : MonoBehaviour
     {
         if (other == null || other.CompareTag("Cat"))
         {
-            Debug.Log("Exited");
-            input.freeroam.Interact.performed -= Interact;
+            Debug.Log("INFO: Entered Trigger Zone Of " + transform.parent.gameObject.name);
+            Globals.Instance.Input.freeroam.Interact.performed -= Interact;
             if (promptTransform != null) promptTransform.gameObject.SetActive(false);
         }
     }
@@ -74,6 +81,7 @@ public class Interactable : MonoBehaviour
     {
         Undefined,
         Item,
-        OldMan
+        OldMan,
+        Telescope
     }
 }

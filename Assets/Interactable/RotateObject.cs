@@ -5,15 +5,17 @@ public class RotateObject : MonoBehaviour
 {
     [SerializeField] private readonly float rotateSpeed = 1f;
     private float rotateAmount;
+    private IEnumerator activeCoroutine;
 
     private void Start()
     {
-        StartCoroutine(Rotate());
+        activeCoroutine = Rotate();
+        StartCoroutine(activeCoroutine);
     }
 
     public void Cancel()
     {
-        StopCoroutine(Rotate());
+        StopCoroutine(activeCoroutine);
     }
 
     private IEnumerator Rotate()
