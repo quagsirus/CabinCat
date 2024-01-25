@@ -17,7 +17,6 @@ public class Man : MonoBehaviour
 
     public void SetText(string text)
     {
-        Debug.Log("ass");
         if (displayingText) return;
         StartCoroutine(UpdateText(text));
         StartCoroutine(HideTextDelay());
@@ -44,7 +43,6 @@ public class Man : MonoBehaviour
 
     public IEnumerator UpdateText(string newText)
     {
-        Debug.Log("oui");
         displayingText = true;
         textDisplay.text = "";
         foreach (var c in newText)

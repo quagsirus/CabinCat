@@ -17,7 +17,7 @@ public class Interactable : MonoBehaviour
             case InteractTypes.Undefined:
                 throw new ArgumentOutOfRangeException();
             case InteractTypes.Item:
-                Debug.Log("item");
+                Debug.Log("INFO: Cat Interacted With Item");
                 if (Globals.Instance.Cat.HoldItem(transform.parent))
                 {
                     collider.enabled = false;
@@ -26,10 +26,14 @@ public class Interactable : MonoBehaviour
 
                 break;
             case InteractTypes.OldMan:
-                Debug.Log("man");
+                Debug.Log("INFO: Cat Interacted With Man");
                 Globals.Instance.Man.SetText(Globals.Instance.Cat.GiveItem()
                     ? "Thanks for the brick lil feller"
                     : "I have a longing for bricks");
+                break;
+            case InteractTypes.Telescope:
+                Debug.Log("INFO: Cat Interacted With Telescope");
+
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -55,7 +59,7 @@ public class Interactable : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Cat")) return;
-        Debug.Log("Entered");
+        Debug.Log("INFO: Entered Trigger Zone Of " + transform.parent.gameObject.name);
         input.freeroam.Interact.performed += Interact;
         if (promptTransform != null) promptTransform.gameObject.SetActive(true);
     }
@@ -64,7 +68,7 @@ public class Interactable : MonoBehaviour
     {
         if (other == null || other.CompareTag("Cat"))
         {
-            Debug.Log("Exited");
+            Debug.Log("INFO: Entered Trigger Zone Of " + transform.parent.gameObject.name);
             input.freeroam.Interact.performed -= Interact;
             if (promptTransform != null) promptTransform.gameObject.SetActive(false);
         }
@@ -74,6 +78,7 @@ public class Interactable : MonoBehaviour
     {
         Undefined,
         Item,
-        OldMan
+        OldMan,
+        Telescope
     }
 }
