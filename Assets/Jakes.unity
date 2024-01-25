@@ -614,6 +614,7 @@ MonoBehaviour:
   textDisplay: {fileID: 1937518413}
   displayingText: 0
   textDisplayLength: 5
+  textDuration: 0
 --- !u!4 &1233097728 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4719798316980350603, guid: 67cc4c5901094a54b86b0393c94801ea, type: 3}
