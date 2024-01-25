@@ -45,7 +45,6 @@ public class ThirdPersonCamera : MonoBehaviour
         {
             var newDistance = Mathf.Clamp(hit.distance, MinDistance, MaxDistance);
             _orbit.position = NewOrbitDistance(newDistance, pivotTransform.parent.position);
-            Debug.Log(newDistance);
         }
         else
         {

@@ -58,7 +58,6 @@ public class Cat : MonoBehaviour
 
         movementDelta += Time.deltaTime * movementInput.x * (CameraRotation * -Vector3.forward) +
                         Time.deltaTime * movementInput.y * (CameraRotation * Vector3.right);
-        Debug.Log(movementInput);
     }
 
     public bool HoldItem(Transform item)
