@@ -63,6 +63,7 @@ public class Cat : MonoBehaviour
         if (heldItem != null) return false;
         item.SetParent(mouthPosition);
         item.position = mouthPosition.position;
+        Globals.Instance.ItemCollected();
         var rotateScript = item.GetComponent<RotateObject>();
         if (rotateScript != null) rotateScript.Cancel();
         heldItem = item;
@@ -74,6 +75,7 @@ public class Cat : MonoBehaviour
         if (heldItem == null) return false;
         var storedMemory = heldItem.GetChild(0).GetComponent<Interactable>().memoryToShow;
         if (storedMemory != Cutscenes.Undefined) Globals.Instance.MemoryManager.DisplayMemory(storedMemory);
+        Globals.Instance.ItemPresented();
         Destroy(heldItem.gameObject);
         heldItem = null;
         return true;

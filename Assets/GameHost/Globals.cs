@@ -10,6 +10,8 @@ public sealed class Globals
     public MemoryManager MemoryManager;
     public event Notify TelescopeActivate;
     public event Notify TelescopeDeactivate;
+    public event Notify ItemGivenToMan;
+    public event Notify ItemPickedUp;
     public void InteractedWithTelescope()
     {
         TelescopeActivate?.Invoke();
@@ -18,6 +20,15 @@ public sealed class Globals
     public void UninteractedWithTelescope()
     {
         TelescopeDeactivate?.Invoke();
+    }
+    public void ItemCollected()
+    {
+        ItemPickedUp?.Invoke();
+    }
+
+    public void ItemPresented()
+    {
+        ItemGivenToMan?.Invoke();
     }
 
     public static Globals Instance => Nested.Instance;
