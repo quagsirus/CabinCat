@@ -1,4 +1,6 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
@@ -8,6 +10,17 @@ public class ThirdPersonCamera : MonoBehaviour
     private Transform _orbit;
 
     private const int LookSpeed = 100;
+
+    private const int MinDistance = 1; // Minimum distance from the pivot
+    private const int MaxDistance = 5; // Maximum distance from the pivot
+    private const int ZoomSpeed = 5; // Speed of zooming
+
+    public LayerMask CollisionLayers;
+
+    private float GetCurrentDistance()
+    {
+        return Vector3.Distance(transform.position, _orbit.position);
+    }
 
     private void Awake()
     {
@@ -22,6 +35,27 @@ public class ThirdPersonCamera : MonoBehaviour
 
         var orbitTarget = new Vector3(transform.position.x, transform.parent.position.y, transform.position.z);
         _orbit.LookAt(orbitTarget);
+
+        if (Physics.Raycast(transform.position,
+                NewOrbitDistance(MaxDistance) - transform.position,
+                out var hit,
+                MaxDistance,
+                CollisionLayers))
+        {
+            var newDistance = Mathf.Clamp(hit.distance, MinDistance, MaxDistance);
+            _orbit.position = NewOrbitDistance(newDistance);
+        }
+        else
+        {
+            Debug.Log("nothingintheway");
+            _orbit.position = NewOrbitDistance(Mathf.Lerp(GetCurrentDistance(), MaxDistance, ZoomSpeed * Time.deltaTime));
+        }
+    }
+
+    private Vector3 NewOrbitDistance(float newDistance)
+    {
+        var directionToCamera = (_orbit.position - transform.position).normalized;
+        return transform.position + directionToCamera * newDistance;
     }
 
     private void FixedUpdate()

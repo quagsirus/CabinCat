@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6284594384209480956}
   - component: {fileID: 4944632250682012988}
   - component: {fileID: 7162901165106565972}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Interactable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 7162901165106565972}
-  interactType: 1
+  promptTransform: {fileID: 0}
 --- !u!135 &7162901165106565972
 SphereCollider:
   m_ObjectHideFlags: 0
