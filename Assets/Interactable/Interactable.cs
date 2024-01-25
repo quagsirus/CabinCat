@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class Interactable : MonoBehaviour
 {
-    [SerializeField] private readonly InteractTypes interactType = InteractTypes.Item;
+    [SerializeField] private InteractTypes interactType = InteractTypes.Item;
 
     [SerializeField] private Collider collider;
     private GameInput input;

@@ -3,9 +3,9 @@ using UnityEngine.InputSystem;
 
 public class Cat : MonoBehaviour
 {
-    [SerializeField] private readonly int jumpHeight = 10;
-    [SerializeField] private readonly int lookSpeed = 10;
-    [SerializeField] private readonly int moveSpeed = 30000;
+    [SerializeField] private int jumpHeight = 10;
+    [SerializeField] private int lookSpeed = 10;
+    [SerializeField] private int moveSpeed = 30000;
     [SerializeField] private Rigidbody camRb;
     [SerializeField] private Transform heldItem;
     private GameInput input;
