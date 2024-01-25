@@ -196,6 +196,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2a5217dd-8530-4bd6-99da-1edda81c8a04"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Default Scheme"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -237,6 +248,56 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""memory"",
+            ""id"": ""8a8b7e8f-4390-4994-b4e8-343efe8c3dda"",
+            ""actions"": [
+                {
+                    ""name"": ""CloseWindow"",
+                    ""type"": ""Button"",
+                    ""id"": ""b7a9c4c9-7bd9-494d-96fb-3276fdab0794"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""debd8fe9-4175-473e-8a17-0579908562d9"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Default Scheme"",
+                    ""action"": ""CloseWindow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4198636a-716a-4cde-81cf-7ba60501bfc9"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Default Scheme"",
+                    ""action"": ""CloseWindow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bd981b59-51dd-4902-8ff5-e10350075cde"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Default Scheme"",
+                    ""action"": ""CloseWindow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -256,6 +317,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         // telescope
         m_telescope = asset.FindActionMap("telescope", throwIfNotFound: true);
         m_telescope_Interact = m_telescope.FindAction("Interact", throwIfNotFound: true);
+        // memory
+        m_memory = asset.FindActionMap("memory", throwIfNotFound: true);
+        m_memory_CloseWindow = m_memory.FindAction("CloseWindow", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -429,6 +493,52 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         }
     }
     public TelescopeActions @telescope => new TelescopeActions(this);
+
+    // memory
+    private readonly InputActionMap m_memory;
+    private List<IMemoryActions> m_MemoryActionsCallbackInterfaces = new List<IMemoryActions>();
+    private readonly InputAction m_memory_CloseWindow;
+    public struct MemoryActions
+    {
+        private @GameInput m_Wrapper;
+        public MemoryActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @CloseWindow => m_Wrapper.m_memory_CloseWindow;
+        public InputActionMap Get() { return m_Wrapper.m_memory; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MemoryActions set) { return set.Get(); }
+        public void AddCallbacks(IMemoryActions instance)
+        {
+            if (instance == null || m_Wrapper.m_MemoryActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_MemoryActionsCallbackInterfaces.Add(instance);
+            @CloseWindow.started += instance.OnCloseWindow;
+            @CloseWindow.performed += instance.OnCloseWindow;
+            @CloseWindow.canceled += instance.OnCloseWindow;
+        }
+
+        private void UnregisterCallbacks(IMemoryActions instance)
+        {
+            @CloseWindow.started -= instance.OnCloseWindow;
+            @CloseWindow.performed -= instance.OnCloseWindow;
+            @CloseWindow.canceled -= instance.OnCloseWindow;
+        }
+
+        public void RemoveCallbacks(IMemoryActions instance)
+        {
+            if (m_Wrapper.m_MemoryActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IMemoryActions instance)
+        {
+            foreach (var item in m_Wrapper.m_MemoryActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_MemoryActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public MemoryActions @memory => new MemoryActions(this);
     private int m_DefaultSchemeSchemeIndex = -1;
     public InputControlScheme DefaultSchemeScheme
     {
@@ -448,5 +558,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     public interface ITelescopeActions
     {
         void OnInteract(InputAction.CallbackContext context);
+    }
+    public interface IMemoryActions
+    {
+        void OnCloseWindow(InputAction.CallbackContext context);
     }
 }

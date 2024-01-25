@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class Constellation : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Cutscenes cutscene = Cutscenes.Undefined;
+    
+    public void Clicked()
     {
-        
+        Debug.Log("aaaaa");
+        Globals.Instance.MemoryManager.DisplayMemory(cutscene);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
+

@@ -7,6 +7,7 @@ public sealed class Globals
     public Camera ActiveCamera;
     public Cat Cat;
     public Man Man;
+    public MemoryManager MemoryManager;
     public event Notify TelescopeActivate;
     public event Notify TelescopeDeactivate;
     public void InteractedWithTelescope()

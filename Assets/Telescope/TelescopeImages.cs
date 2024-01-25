@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework.Constraints;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Windows;
@@ -7,6 +8,7 @@ using UnityEngine.Windows;
 public class TelescopeImages : MonoBehaviour 
 {
     [SerializeField] private GameObject nightSky;
+
     void Start()
     {
         Globals.Instance.TelescopeDeactivate += Hide;
@@ -33,6 +35,8 @@ public class TelescopeImages : MonoBehaviour
         Globals.Instance.Cat.Input.freeroam.Enable();
         Globals.Instance.Cat.Input.telescope.Disable();
     }
+
+
 
     void HideOnInteract(InputAction.CallbackContext _)
     {

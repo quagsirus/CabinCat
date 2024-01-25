@@ -52,12 +52,12 @@ public class Interactable : MonoBehaviour
 
     private void OnEnable()
     {
-        Globals.Instance.TelescopeActivate += TelescopeActivated;
+        if (interactType == InteractTypes.Telescope) Globals.Instance.TelescopeActivate += TelescopeActivated;
     }
 
     private void OnDisable()
     {
-        Globals.Instance.TelescopeActivate -= TelescopeActivated;
+         if (interactType == InteractTypes.Telescope) Globals.Instance.TelescopeActivate -= TelescopeActivated;
     }
 
     private void OnTriggerEnter(Collider other)
