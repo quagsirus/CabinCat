@@ -612,8 +612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textDisplay: {fileID: 1937518413}
-  displayingText: 0
-  textDisplayLength: 5
+  textDuration: 0
 --- !u!4 &1233097728 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4719798316980350603, guid: 67cc4c5901094a54b86b0393c94801ea, type: 3}
@@ -792,23 +791,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1990524229 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1481862306790801200, guid: 80a8ba51b4a158d44aa8d63ef8c456b6, type: 3}
-  m_PrefabInstance: {fileID: 4441551059099962280}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1990524234
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1990524229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a289d360278458e4da7ef98d31fa9ce2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2117234857
 GameObject:
   m_ObjectHideFlags: 0
@@ -976,7 +958,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3493874737995519420, guid: 80a8ba51b4a158d44aa8d63ef8c456b6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3493874737995519420, guid: 80a8ba51b4a158d44aa8d63ef8c456b6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1017,10 +999,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1481862306790801200, guid: 80a8ba51b4a158d44aa8d63ef8c456b6, type: 3}
-      insertIndex: 1
-      addedObject: {fileID: 1990524234}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 80a8ba51b4a158d44aa8d63ef8c456b6, type: 3}
 --- !u!1001 &5973577503294909239
 PrefabInstance:
