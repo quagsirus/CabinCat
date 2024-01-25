@@ -7,7 +7,7 @@ public class Man : MonoBehaviour
     [SerializeField] private readonly float textDisplayLength = 5f;
     private bool displayingText;
     [SerializeField] private TextMeshPro textDisplay;
-    [SerializeField] private float textDuration;
+    [SerializeField] private float textDuration; 
 
     private void Start()
     {
@@ -20,7 +20,6 @@ public class Man : MonoBehaviour
         Debug.Log("ass");
         if (displayingText) return;
         StartCoroutine(UpdateText(text));
-        StopCoroutine(HideTextDelay());
         StartCoroutine(HideTextDelay());
     }
 
