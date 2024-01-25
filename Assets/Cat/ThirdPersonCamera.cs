@@ -47,7 +47,6 @@ public class ThirdPersonCamera : MonoBehaviour
         }
         else
         {
-            Debug.Log("nothingintheway");
             _orbit.position = NewOrbitDistance(Mathf.Lerp(GetCurrentDistance(), MaxDistance, ZoomSpeed * Time.deltaTime));
         }
     }
