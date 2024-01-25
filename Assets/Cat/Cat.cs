@@ -13,16 +13,14 @@ public class Cat : MonoBehaviour
     private Vector3 movementDelta;
     [SerializeField] private Rigidbody rb;
     private Quaternion targetCameraRotation;
+    public GameInput Input;
 
     public Quaternion CameraRotation;
 
     private void Awake()
     {
-        Globals.Instance.Input.freeroam.Jump.performed += Jump;
-    }
-
-    private void Start()
-    {
+        Input = new GameInput();
+        Input.freeroam.Jump.performed += Jump;
         Globals.Instance.Cat = this;
     }
 
@@ -34,12 +32,12 @@ public class Cat : MonoBehaviour
 
     private void OnEnable()
     {
-        Globals.Instance.Input.freeroam.Enable();
+        Input.freeroam.Enable();
     }
 
     private void OnDisable()
     {
-        Globals.Instance.Input.freeroam.Disable();
+        Input.freeroam.Disable();
     }
 
     private void FixedUpdate()
@@ -53,7 +51,7 @@ public class Cat : MonoBehaviour
 
     private void Update()
     {
-        var movementInput = Globals.Instance.Input.freeroam.Movement.ReadValue<Vector2>();
+        var movementInput = Input.freeroam.Movement.ReadValue<Vector2>();
         
 
         movementDelta += Time.deltaTime * movementInput.x * (CameraRotation * -Vector3.forward) +

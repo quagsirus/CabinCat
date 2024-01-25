@@ -15,21 +15,21 @@ public class TelescopeImages : MonoBehaviour
 
     private void Awake()
     {
-        Globals.Instance.Input.freeroam.Interact.performed += HideOnInteract;
+        Globals.Instance.Cat.Input.telescope.Interact.performed += HideOnInteract;
     }
 
     void Show()
     {
         nightSky.SetActive(true);
-        Globals.Instance.Input.freeroam.Disable();
-        Globals.Instance.Input.telescope.Enable();
+        Globals.Instance.Cat.Input.freeroam.Disable();
+        Globals.Instance.Cat.Input.telescope.Enable();
     }
 
     void Hide()
     {
         nightSky.SetActive(false);
-        Globals.Instance.Input.freeroam.Enable();
-        Globals.Instance.Input.telescope.Disable();
+        Globals.Instance.Cat.Input.freeroam.Enable();
+        Globals.Instance.Cat.Input.telescope.Disable();
     }
 
     void HideOnInteract(InputAction.CallbackContext _)

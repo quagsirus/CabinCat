@@ -1,4 +1,5 @@
 using System;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,6 +20,7 @@ public class Interactable : MonoBehaviour
                 if (Globals.Instance.Cat.HoldItem(transform.parent))
                 {
                     collider.enabled = false;
+                    transform.parent.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
                     OnTriggerExit(null);
                 }
 
@@ -45,7 +47,6 @@ public class Interactable : MonoBehaviour
 
     private void Awake()
     {
-        Globals.Instance.Input = new GameInput();
         if (promptTransform != null) promptTransform.gameObject.SetActive(false);
     }
 
@@ -63,7 +64,7 @@ public class Interactable : MonoBehaviour
     {
         if (!other.CompareTag("Cat")) return;
         Debug.Log("INFO: Entered Trigger Zone Of " + transform.parent.gameObject.name);
-        Globals.Instance.Input.freeroam.Interact.performed += Interact;
+        Globals.Instance.Cat.Input.freeroam.Interact.performed += Interact;
         if (promptTransform != null) promptTransform.gameObject.SetActive(true);
     }
 
@@ -72,7 +73,7 @@ public class Interactable : MonoBehaviour
         if (other == null || other.CompareTag("Cat"))
         {
             Debug.Log("INFO: Entered Trigger Zone Of " + transform.parent.gameObject.name);
-            Globals.Instance.Input.freeroam.Interact.performed -= Interact;
+            Globals.Instance.Cat.Input.freeroam.Interact.performed -= Interact;
             if (promptTransform != null) promptTransform.gameObject.SetActive(false);
         }
     }
