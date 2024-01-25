@@ -19,7 +19,7 @@ public class ThirdPersonCamera : MonoBehaviour
 
     private float GetCurrentDistance()
     {
-        return Vector3.Distance(transform.position, _orbit.position);
+        return Vector3.Distance(transform.parent.position, _orbit.position);
     }
 
     private void Awake()
@@ -33,28 +33,30 @@ public class ThirdPersonCamera : MonoBehaviour
     {
         _lookDelta += LookSpeed * Time.deltaTime * _input.freeroam.Look.ReadValue<Vector2>();
 
-        var orbitTarget = new Vector3(transform.position.x, transform.parent.position.y, transform.position.z);
+        var pivotTransform = transform;
+        var orbitTarget = new Vector3(pivotTransform.position.x, pivotTransform.parent.position.y, pivotTransform.position.z);
         _orbit.LookAt(orbitTarget);
 
-        if (Physics.Raycast(transform.position,
-                NewOrbitDistance(MaxDistance) - transform.position,
+        if (Physics.Raycast(pivotTransform.parent.position,
+                NewOrbitDistance(MaxDistance, pivotTransform.parent.position) - pivotTransform.parent.position,
                 out var hit,
                 MaxDistance,
                 CollisionLayers))
         {
             var newDistance = Mathf.Clamp(hit.distance, MinDistance, MaxDistance);
-            _orbit.position = NewOrbitDistance(newDistance);
+            _orbit.position = NewOrbitDistance(newDistance, pivotTransform.parent.position);
+            Debug.Log(newDistance);
         }
         else
         {
-            _orbit.position = NewOrbitDistance(Mathf.Lerp(GetCurrentDistance(), MaxDistance, ZoomSpeed * Time.deltaTime));
+            _orbit.position = NewOrbitDistance(Mathf.Lerp(GetCurrentDistance(), MaxDistance, ZoomSpeed * Time.deltaTime), pivotTransform.parent.position);
         }
     }
 
-    private Vector3 NewOrbitDistance(float newDistance)
+    private Vector3 NewOrbitDistance(float newDistance, Vector3 positionToOrbit)
     {
-        var directionToCamera = (_orbit.position - transform.position).normalized;
-        return transform.position + directionToCamera * newDistance;
+        var directionToCamera = (_orbit.position - positionToOrbit).normalized;
+        return positionToOrbit + directionToCamera * newDistance;
     }
 
     private void FixedUpdate()

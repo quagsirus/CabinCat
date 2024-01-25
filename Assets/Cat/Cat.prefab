@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7023375716613376907}
   - component: {fileID: 3369952864501911607}
   - component: {fileID: 7837946322033871994}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: CameraPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75,6 +75,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c34c21e4560b6d43b467756d15f1277, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CollisionLayers:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!145 &3369952864501911607
 SpringJoint:
   m_ObjectHideFlags: 0
@@ -88,12 +91,12 @@ SpringJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0, y: 2, z: 0}
+  m_ConnectedAnchor: {x: 0, y: 2.5, z: 0}
   m_Spring: 30
   m_Damper: 5
   m_MinDistance: 0
   m_MaxDistance: 0
-  m_Tolerance: 1
+  m_Tolerance: 2
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_EnableCollision: 0
@@ -214,7 +217,7 @@ GameObject:
   - component: {fileID: 5327137770909178470}
   - component: {fileID: 3910872369124901599}
   - component: {fileID: 6089506966309088782}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -364,7 +367,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7888510825660687403}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -402,7 +405,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3138092110297212780}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Mouth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -435,7 +438,7 @@ GameObject:
   - component: {fileID: 3493874737995519420}
   - component: {fileID: 5887621150595980501}
   - component: {fileID: 8624901773037554776}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cat
   m_TagString: Cat
   m_Icon: {fileID: 0}
@@ -516,7 +519,7 @@ GameObject:
   - component: {fileID: 7851438278707305101}
   - component: {fileID: 4496606746735408957}
   - component: {fileID: 6535712936905390368}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -622,7 +625,7 @@ GameObject:
   - component: {fileID: 6096320346637436063}
   - component: {fileID: 7763830857308572057}
   - component: {fileID: 4421787028655462295}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -708,7 +711,7 @@ GameObject:
   - component: {fileID: 6979826570223350440}
   - component: {fileID: 8755918931155066159}
   - component: {fileID: 1139650156990501159}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Capsule
   m_TagString: Cat
   m_Icon: {fileID: 0}
@@ -817,7 +820,7 @@ GameObject:
   - component: {fileID: 5058368749073608041}
   - component: {fileID: 4247460797733480589}
   - component: {fileID: 4562740847362141510}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -924,7 +927,7 @@ GameObject:
   - component: {fileID: 4663524205716816279}
   - component: {fileID: 8045306536736242248}
   - component: {fileID: 6207937711672215135}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1030,7 +1033,7 @@ GameObject:
   - component: {fileID: 2141623538729280788}
   - component: {fileID: 5702386663288580575}
   - component: {fileID: 8414428044677606512}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Plane (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1116,7 +1119,7 @@ GameObject:
   - component: {fileID: 8884861578295917462}
   - component: {fileID: 1269678087599449848}
   - component: {fileID: 5719231365394160726}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
