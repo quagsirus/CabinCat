@@ -21,6 +21,7 @@ public class TelescopeImages : MonoBehaviour
     void Show()
     {
         nightSky.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
         Globals.Instance.Cat.Input.freeroam.Disable();
         Globals.Instance.Cat.Input.telescope.Enable();
     }
@@ -28,6 +29,7 @@ public class TelescopeImages : MonoBehaviour
     void Hide()
     {
         nightSky.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
         Globals.Instance.Cat.Input.freeroam.Enable();
         Globals.Instance.Cat.Input.telescope.Disable();
     }
