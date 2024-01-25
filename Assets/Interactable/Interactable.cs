@@ -5,9 +5,7 @@ using UnityEngine.InputSystem;
 public class Interactable : MonoBehaviour
 {
     [SerializeField] private InteractTypes interactType = InteractTypes.Item;
-
     [SerializeField] private Collider collider;
-    private GameInput input;
     [SerializeField] private Transform promptTransform;
 
     private void Interact(InputAction.CallbackContext callbackContext)
@@ -33,34 +31,39 @@ public class Interactable : MonoBehaviour
                 break;
             case InteractTypes.Telescope:
                 Debug.Log("INFO: Cat Interacted With Telescope");
-
+                Globals.Instance.InteractedWithTelescope();
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
     }
 
+    private void TelescopeActivated()
+    {
+        Debug.Log("TelescopeActivated");
+    }
+
     private void Awake()
     {
-        input = new GameInput();
+        Globals.Instance.Input = new GameInput();
         if (promptTransform != null) promptTransform.gameObject.SetActive(false);
     }
 
     private void OnEnable()
     {
-        input.freeroam.Enable();
+        Globals.Instance.TelescopeActivate += TelescopeActivated;
     }
 
     private void OnDisable()
     {
-        input.freeroam.Disable();
+        Globals.Instance.TelescopeActivate -= TelescopeActivated;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Cat")) return;
         Debug.Log("INFO: Entered Trigger Zone Of " + transform.parent.gameObject.name);
-        input.freeroam.Interact.performed += Interact;
+        Globals.Instance.Input.freeroam.Interact.performed += Interact;
         if (promptTransform != null) promptTransform.gameObject.SetActive(true);
     }
 
@@ -69,7 +72,7 @@ public class Interactable : MonoBehaviour
         if (other == null || other.CompareTag("Cat"))
         {
             Debug.Log("INFO: Entered Trigger Zone Of " + transform.parent.gameObject.name);
-            input.freeroam.Interact.performed -= Interact;
+            Globals.Instance.Input.freeroam.Interact.performed -= Interact;
             if (promptTransform != null) promptTransform.gameObject.SetActive(false);
         }
     }

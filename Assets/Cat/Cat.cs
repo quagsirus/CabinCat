@@ -8,7 +8,6 @@ public class Cat : MonoBehaviour
     [SerializeField] private int moveSpeed = 30000;
     [SerializeField] private Rigidbody camRb;
     [SerializeField] private Transform heldItem;
-    private GameInput input;
     private Vector2 inputRotation;
     [SerializeField] private Transform mouthPosition;
     private Vector3 movementDelta;
@@ -19,8 +18,7 @@ public class Cat : MonoBehaviour
 
     private void Awake()
     {
-        input = new GameInput();
-        input.freeroam.Jump.performed += Jump;
+        Globals.Instance.Input.freeroam.Jump.performed += Jump;
     }
 
     private void Start()
@@ -36,12 +34,12 @@ public class Cat : MonoBehaviour
 
     private void OnEnable()
     {
-        input.freeroam.Enable();
+        Globals.Instance.Input.freeroam.Enable();
     }
 
     private void OnDisable()
     {
-        input.freeroam.Disable();
+        Globals.Instance.Input.freeroam.Disable();
     }
 
     private void FixedUpdate()
@@ -55,10 +53,12 @@ public class Cat : MonoBehaviour
 
     private void Update()
     {
-        var movementInput = input.freeroam.Movement.ReadValue<Vector2>();
+        var movementInput = Globals.Instance.Input.freeroam.Movement.ReadValue<Vector2>();
+        
 
         movementDelta += Time.deltaTime * movementInput.x * (CameraRotation * -Vector3.forward) +
                         Time.deltaTime * movementInput.y * (CameraRotation * Vector3.right);
+        Debug.Log(movementInput);
     }
 
     public bool HoldItem(Transform item)

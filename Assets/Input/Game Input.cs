@@ -144,6 +144,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""8c4da6a1-884d-4a82-a196-d8588030f363"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Default Scheme"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""f586806d-2cca-4563-b749-269e11f4f18e"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
@@ -155,8 +166,69 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""ed83e387-4671-45d6-9a62-6f6fbf39e511"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Default Scheme"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""e6c79ee3-14e7-4bd9-ad34-8cadc7788a3c"",
                     ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Default Scheme"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""03f31b37-1433-495a-8803-7ed840c51b40"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Default Scheme"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""telescope"",
+            ""id"": ""4b37a9f3-a6fb-44ea-b1fe-321d5a54a65c"",
+            ""actions"": [
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""d53829ab-6271-4618-bc23-020660ee6be6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""61a4d7d8-9b87-4f6d-8ea5-285308e50118"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Default Scheme"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6d1b9f27-2e9b-47da-97be-1bcce031b954"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Default Scheme"",
@@ -181,6 +253,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_freeroam_Jump = m_freeroam.FindAction("Jump", throwIfNotFound: true);
         m_freeroam_Look = m_freeroam.FindAction("Look", throwIfNotFound: true);
         m_freeroam_Interact = m_freeroam.FindAction("Interact", throwIfNotFound: true);
+        // telescope
+        m_telescope = asset.FindActionMap("telescope", throwIfNotFound: true);
+        m_telescope_Interact = m_telescope.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -308,6 +383,52 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         }
     }
     public FreeroamActions @freeroam => new FreeroamActions(this);
+
+    // telescope
+    private readonly InputActionMap m_telescope;
+    private List<ITelescopeActions> m_TelescopeActionsCallbackInterfaces = new List<ITelescopeActions>();
+    private readonly InputAction m_telescope_Interact;
+    public struct TelescopeActions
+    {
+        private @GameInput m_Wrapper;
+        public TelescopeActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Interact => m_Wrapper.m_telescope_Interact;
+        public InputActionMap Get() { return m_Wrapper.m_telescope; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(TelescopeActions set) { return set.Get(); }
+        public void AddCallbacks(ITelescopeActions instance)
+        {
+            if (instance == null || m_Wrapper.m_TelescopeActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_TelescopeActionsCallbackInterfaces.Add(instance);
+            @Interact.started += instance.OnInteract;
+            @Interact.performed += instance.OnInteract;
+            @Interact.canceled += instance.OnInteract;
+        }
+
+        private void UnregisterCallbacks(ITelescopeActions instance)
+        {
+            @Interact.started -= instance.OnInteract;
+            @Interact.performed -= instance.OnInteract;
+            @Interact.canceled -= instance.OnInteract;
+        }
+
+        public void RemoveCallbacks(ITelescopeActions instance)
+        {
+            if (m_Wrapper.m_TelescopeActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ITelescopeActions instance)
+        {
+            foreach (var item in m_Wrapper.m_TelescopeActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_TelescopeActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public TelescopeActions @telescope => new TelescopeActions(this);
     private int m_DefaultSchemeSchemeIndex = -1;
     public InputControlScheme DefaultSchemeScheme
     {
@@ -322,6 +443,10 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
+    }
+    public interface ITelescopeActions
+    {
         void OnInteract(InputAction.CallbackContext context);
     }
 }
