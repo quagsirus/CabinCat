@@ -31,6 +31,10 @@ public class MemoryManager : MonoBehaviour
         memoryImage.SetActive(true);
         memoryToClose = memoryImage;
         enableTelescopeControlsOnMemoryEnd = Globals.Instance.Cat.Input.telescope.enabled;
+        if (!enableTelescopeControlsOnMemoryEnd)
+        {
+            memoryImage.GetComponent<MemoryImage>().memoryConstellationButton.Unlock();
+        }
         Globals.Instance.Cat.Input.memory.Enable();
         if (Globals.Instance.Cat.Input.freeroam.enabled) Globals.Instance.Cat.Input.freeroam.Disable();
         if (Globals.Instance.Cat.Input.telescope.enabled) Globals.Instance.Cat.Input.telescope.Disable();

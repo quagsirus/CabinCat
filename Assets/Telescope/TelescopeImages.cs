@@ -13,6 +13,8 @@ public class TelescopeImages : MonoBehaviour
     {
         Globals.Instance.TelescopeDeactivate += Hide;
         Globals.Instance.TelescopeActivate += Show;
+        Show();
+        Hide();
     }
 
     private void Awake()

@@ -524,6 +524,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1538123359}
     m_Modifications:
+    - target: {fileID: 26173481968036452, guid: 374682401c0114e48904ec5314066050, type: 3}
+      propertyPath: memoryConstellationButton
+      value: 
+      objectReference: {fileID: 1451791247}
     - target: {fileID: 1384032782941674563, guid: 374682401c0114e48904ec5314066050, type: 3}
       propertyPath: m_Color.b
       value: 0.06728373
@@ -777,6 +781,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutscene: 5
+  image: {fileID: 816353875}
+  locked: 1
 --- !u!222 &816353877
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -963,6 +969,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1538123359}
     m_Modifications:
+    - target: {fileID: 26173481968036452, guid: 374682401c0114e48904ec5314066050, type: 3}
+      propertyPath: memoryConstellationButton
+      value: 
+      objectReference: {fileID: 1311840810}
     - target: {fileID: 1384032782941674563, guid: 374682401c0114e48904ec5314066050, type: 3}
       propertyPath: m_Color.b
       value: 0.30882066
@@ -1216,6 +1226,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutscene: 1
+  image: {fileID: 1194842152}
+  locked: 1
 --- !u!222 &1194842154
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1375,6 +1387,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutscene: 3
+  image: {fileID: 1311840808}
+  locked: 1
 --- !u!1001 &1351015183
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1383,6 +1397,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1538123359}
     m_Modifications:
+    - target: {fileID: 26173481968036452, guid: 374682401c0114e48904ec5314066050, type: 3}
+      propertyPath: memoryConstellationButton
+      value: 
+      objectReference: {fileID: 1443920365}
     - target: {fileID: 1384032782941674563, guid: 374682401c0114e48904ec5314066050, type: 3}
       propertyPath: m_Color.b
       value: 0.9150943
@@ -1546,6 +1564,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5580682259851060547, guid: 8cbb21db733d74249a45b3e1dea4ff11, type: 3}
+      propertyPath: memoryToShow
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7689081402778765053, guid: 8cbb21db733d74249a45b3e1dea4ff11, type: 3}
       propertyPath: m_Name
       value: brick (1)
@@ -1575,7 +1597,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1408692772
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1777,6 +1799,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutscene: 4
+  image: {fileID: 1443920364}
+  locked: 1
 --- !u!222 &1443920366
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1923,6 +1947,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cutscene: 2
+  image: {fileID: 1451791246}
+  locked: 1
 --- !u!222 &1451791248
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2234,6 +2260,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5580682259851060547, guid: 8cbb21db733d74249a45b3e1dea4ff11, type: 3}
+      propertyPath: memoryToShow
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7689081402778765053, guid: 8cbb21db733d74249a45b3e1dea4ff11, type: 3}
       propertyPath: m_Name
       value: brick
@@ -2254,6 +2284,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1538123359}
     m_Modifications:
+    - target: {fileID: 26173481968036452, guid: 374682401c0114e48904ec5314066050, type: 3}
+      propertyPath: memoryConstellationButton
+      value: 
+      objectReference: {fileID: 1194842153}
     - target: {fileID: 3164174064885451006, guid: 374682401c0114e48904ec5314066050, type: 3}
       propertyPath: m_Name
       value: BoxMemory
@@ -2496,6 +2530,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1538123359}
     m_Modifications:
+    - target: {fileID: 26173481968036452, guid: 374682401c0114e48904ec5314066050, type: 3}
+      propertyPath: memoryConstellationButton
+      value: 
+      objectReference: {fileID: 816353876}
     - target: {fileID: 1384032782941674563, guid: 374682401c0114e48904ec5314066050, type: 3}
       propertyPath: m_Color.b
       value: 0
