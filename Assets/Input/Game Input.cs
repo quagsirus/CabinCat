@@ -285,17 +285,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""CloseWindow"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""bd981b59-51dd-4902-8ff5-e10350075cde"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Default Scheme"",
-                    ""action"": ""CloseWindow"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
