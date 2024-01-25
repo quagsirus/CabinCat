@@ -72,6 +72,8 @@ public class Cat : MonoBehaviour
     public bool GiveItem()
     {
         if (heldItem == null) return false;
+        var storedMemory = heldItem.GetChild(0).GetComponent<Interactable>().memoryToShow;
+        if (storedMemory != Cutscenes.Undefined) Globals.Instance.MemoryManager.DisplayMemory(storedMemory);
         Destroy(heldItem.gameObject);
         heldItem = null;
         return true;

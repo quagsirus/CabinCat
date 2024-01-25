@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class Interactable : MonoBehaviour
 {
     [SerializeField] private InteractTypes interactType = InteractTypes.Item;
-    [SerializeField] private Cutscenes memoryToShow = Cutscenes.Undefined;
+    public Cutscenes memoryToShow = Cutscenes.Undefined;
     [SerializeField] private Collider collider;
     [SerializeField] private Transform promptTransform;
 
