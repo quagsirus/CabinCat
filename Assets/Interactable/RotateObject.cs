@@ -1,11 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RotateObject : MonoBehaviour
 {
-    float rotateAmount;
-    [SerializeField] private float rotateSpeed = 1f;
+    [SerializeField] private readonly float rotateSpeed = 1f;
+    private float rotateAmount;
 
     private void Start()
     {

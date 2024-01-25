@@ -1,19 +1,16 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Interactable : MonoBehaviour
 {
+    [SerializeField] private readonly InteractTypes interactType = InteractTypes.Item;
+
     [SerializeField] private Collider collider;
-    GameInput input;
-    [SerializeField] private InteractTypes interactType = InteractTypes.Item;
+    private GameInput input;
     [SerializeField] private Transform promptTransform;
 
-    void Interact(InputAction.CallbackContext callbackContext)
+    private void Interact(InputAction.CallbackContext callbackContext)
     {
         switch (interactType)
         {
@@ -21,49 +18,49 @@ public class Interactable : MonoBehaviour
                 throw new ArgumentOutOfRangeException();
             case InteractTypes.Item:
                 Debug.Log("item");
-                if (Globals.Instance.cat.HoldItem(transform.parent))
+                if (Globals.Instance.Cat.HoldItem(transform.parent))
                 {
                     collider.enabled = false;
                     OnTriggerExit(null);
                 }
+
                 break;
             case InteractTypes.OldMan:
                 Debug.Log("man");
-                if (Globals.Instance.cat.GiveItem())
-                {
-                    Globals.Instance.man.SetText("Thanks for the brick lil feller");
-                }
-                else Globals.Instance.man.SetText("I have a longing for bricks");
+                Globals.Instance.Man.SetText(Globals.Instance.Cat.GiveItem()
+                    ? "Thanks for the brick lil feller"
+                    : "I have a longing for bricks");
                 break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
     }
 
-    void Awake()
+    private void Awake()
     {
         input = new GameInput();
         if (promptTransform != null) promptTransform.gameObject.SetActive(false);
     }
 
-    void OnEnable()
+    private void OnEnable()
     {
         input.freeroam.Enable();
     }
-    void OnDisable()
+
+    private void OnDisable()
     {
         input.freeroam.Disable();
     }
 
-    void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Cat"))
-        {
-            Debug.Log("Entered");
-            input.freeroam.Interact.performed += Interact;
-            if (promptTransform != null) promptTransform.gameObject.SetActive(true);
-        }
+        if (!other.CompareTag("Cat")) return;
+        Debug.Log("Entered");
+        input.freeroam.Interact.performed += Interact;
+        if (promptTransform != null) promptTransform.gameObject.SetActive(true);
     }
 
-    void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (other == null || other.CompareTag("Cat"))
         {
@@ -73,10 +70,10 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    public enum InteractTypes
+    private enum InteractTypes
     {
         Undefined,
         Item,
-        OldMan,
+        OldMan
     }
 }
