@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem.HID;
 
@@ -11,8 +12,14 @@ public class ThirdPersonCamera : MonoBehaviour
     private const int LookSpeed = 100;
 
     private const int MinDistance = 1; // Minimum distance from the pivot
-    private const int MaxDistance = 2; // Maximum distance from the pivot
-    private const int ZoomSpeed = 3; // Speed of zooming
+    private const float MaxDistance = 2.0f; // Maximum distance from the pivot
+
+    private float AdaptiveMaxDistance(float yOffset)
+    {
+        return Mathf.Clamp(MinDistance + yOffset * 1f, 0, MaxDistance);
+    }
+
+    private const int ZoomSpeed = 5; // Speed of zooming
 
     public LayerMask CollisionLayers;
 
@@ -32,38 +39,36 @@ public class ThirdPersonCamera : MonoBehaviour
     {
         _lookDelta += LookSpeed * Time.deltaTime * _input.freeroam.Look.ReadValue<Vector2>();
 
-        var pivotTransform = transform;
-        var orbitTarget = new Vector3(pivotTransform.position.x, pivotTransform.parent.position.y, pivotTransform.position.z);
-        var yAdjustedMaxDistance = Mathf.Clamp(pivotTransform.position.y - orbitTarget.y - 0.75f, 0, MaxDistance) * 3 + MinDistance;
-        Debug.Log(yAdjustedMaxDistance);
-
+        var orbitTarget = new Vector3(transform.position.x, transform.parent.position.y, transform.position.z);
         _orbit.LookAt(orbitTarget);
 
-        if (Physics.Raycast(pivotTransform.parent.position,
-                NewOrbitDistance(yAdjustedMaxDistance, pivotTransform.parent.position) - pivotTransform.parent.position,
+        var frameMaxDistance = AdaptiveMaxDistance(transform.position.y - transform.parent.position.y);
+
+        if (Physics.Raycast(transform.position,
+                NewOrbitDistance(frameMaxDistance) - transform.position,
                 out var hit,
-                yAdjustedMaxDistance,
+                MaxDistance,
                 CollisionLayers))
         {
-            var newDistance = Mathf.Clamp(hit.distance - 0.4f, MinDistance * 0.2f, yAdjustedMaxDistance);
-            _orbit.position = NewOrbitDistance(newDistance, pivotTransform.position);
+            var newDistance = Mathf.Clamp(hit.distance, MinDistance, frameMaxDistance);
+            _orbit.position = NewOrbitDistance(newDistance);
         }
         else
         {
-            _orbit.position = NewOrbitDistance(Mathf.Lerp(GetCurrentDistance(), yAdjustedMaxDistance, ZoomSpeed * Time.deltaTime), pivotTransform.position);
+            _orbit.position = NewOrbitDistance(Mathf.Lerp(GetCurrentDistance(), frameMaxDistance, ZoomSpeed * Time.deltaTime));
         }
     }
 
-    private Vector3 NewOrbitDistance(float newDistance, Vector3 positionToOrbit)
+    private Vector3 NewOrbitDistance(float newDistance)
     {
-        var directionToCamera = (_orbit.position - positionToOrbit).normalized;
-        return positionToOrbit + directionToCamera * newDistance;
+        var directionToCamera = (_orbit.position - transform.position).normalized;
+        return transform.position + directionToCamera * newDistance;
     }
 
     private void FixedUpdate()
     {
         _rigidbody.AddTorque(0, _lookDelta.x, 0, ForceMode.Acceleration);
-        _rigidbody.AddForce(0, -_lookDelta.y, 0, ForceMode.Acceleration);
+        _rigidbody.AddForce(0, _lookDelta.y, 0, ForceMode.Acceleration);
 
         Globals.Instance.Cat.CameraRotation = transform.rotation;
         _lookDelta = Vector2.zero;
