@@ -68,7 +68,7 @@ public class ThirdPersonCamera : MonoBehaviour
     private void FixedUpdate()
     {
         _rigidbody.AddTorque(0, _lookDelta.x, 0, ForceMode.Acceleration);
-        _rigidbody.AddForce(0, _lookDelta.y, 0, ForceMode.Acceleration);
+        _rigidbody.AddForce(0, -_lookDelta.y, 0, ForceMode.Acceleration);
 
         Globals.Instance.Cat.CameraRotation = transform.rotation;
         _lookDelta = Vector2.zero;

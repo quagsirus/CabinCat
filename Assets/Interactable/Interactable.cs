@@ -15,6 +15,7 @@ public class Interactable : MonoBehaviour
     [SerializeField] private float rotationOffsetZ = 0f;
     [SerializeField] private Transform promptTransform;
     [SerializeField] private AudioSource audioSource;
+    private GameObject particleSystem;
 
     private void Interact(InputAction.CallbackContext callbackContext)
     {
@@ -33,6 +34,7 @@ public class Interactable : MonoBehaviour
                     OnTriggerExit(null);
                     audioSource.volume = Globals.Instance.SFXVolume;
                     audioSource.Play();
+                    if (particleSystem != null) particleSystem.SetActive(false);
                     transform.parent.transform.localScale -= transform.parent.transform.localScale * (1-pickedUpSize);
                 }
                 break;
@@ -62,6 +64,7 @@ public class Interactable : MonoBehaviour
     private void Awake()
     {
         if (promptTransform != null) promptTransform.gameObject.SetActive(false);
+        particleSystem = GetComponentInChildren<ParticleSystem>()?.gameObject;
     }
 
     private void OnEnable()
