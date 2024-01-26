@@ -60,7 +60,7 @@ public class Cat : MonoBehaviour
         movementDelta += Time.deltaTime * movementInput.x * (CameraRotation * -Vector3.forward) +
                         Time.deltaTime * movementInput.y * (CameraRotation * Vector3.right);
 
-        //animator.SetBool("still", movementDelta == Vector3.zero);
+        animator.SetBool("still", movementDelta == Vector3.zero);
     }
 
     public bool HoldItem(Transform item, float itemOffset = 0f, float rotationOffsetX = 0f)
