@@ -1,3 +1,4 @@
+using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -62,11 +63,13 @@ public class Cat : MonoBehaviour
         //animator.SetBool("still", movementDelta == Vector3.zero);
     }
 
-    public bool HoldItem(Transform item)
+    public bool HoldItem(Transform item, float itemOffset = 0f, float rotationOffsetX = 0f)
     {
         if (heldItem != null) return false;
-        item.SetParent(mouthPosition);
         item.position = mouthPosition.position;
+        item.position += item.forward * itemOffset; 
+        item.SetParent(mouthPosition);
+        item.rotation = mouthPosition.rotation * Quaternion.Euler(rotationOffsetX, 0, 0);
         Globals.Instance.ItemCollected();
         var rotateScript = item.GetComponent<RotateObject>();
         if (rotateScript != null) rotateScript.Cancel();

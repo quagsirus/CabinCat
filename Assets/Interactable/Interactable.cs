@@ -7,6 +7,9 @@ public class Interactable : MonoBehaviour
     [SerializeField] private InteractTypes interactType = InteractTypes.Item;
     public Cutscenes memoryToShow = Cutscenes.Undefined;
     [SerializeField] private Collider collider;
+    [SerializeField] private float pickedUpSize = 1.0f;
+    [SerializeField] private float forwardsOffset = 0f;
+    [SerializeField] private float rotationOffsetX = 0f;
     [SerializeField] private Transform promptTransform;
     [SerializeField] private AudioSource audioSource;
 
@@ -20,13 +23,14 @@ public class Interactable : MonoBehaviour
                 throw new ArgumentOutOfRangeException();
             case InteractTypes.Item:
                 Debug.Log("INFO: Cat Interacted With Item");
-                if (Globals.Instance.Cat.HoldItem(transform.parent))
+                if (Globals.Instance.Cat.HoldItem(transform.parent, forwardsOffset, rotationOffsetX))
                 {
                     collider.enabled = false;
                     transform.parent.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
                     OnTriggerExit(null);
                     audioSource.volume = Globals.Instance.SFXVolume;
                     audioSource.Play();
+                    transform.parent.transform.localScale -= transform.parent.transform.localScale * pickedUpSize;
                 }
                 break;
             case InteractTypes.OldMan:
