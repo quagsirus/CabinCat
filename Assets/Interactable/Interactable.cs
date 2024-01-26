@@ -76,6 +76,7 @@ public class Interactable : MonoBehaviour
         Debug.Log("asdfdgh" + other.name);
         if (!other.CompareTag("Cat")) return;
         Debug.Log("INFO: Entered Trigger Zone Of " + transform.parent.gameObject.name);
+        if (interactType == InteractTypes.OldMan && Globals.Instance.Cat.HeldItem == null) return;
         Globals.Instance.Cat.Input.freeroam.Interact.performed += Interact;
         if (promptTransform != null) promptTransform.gameObject.SetActive(true);
     }
