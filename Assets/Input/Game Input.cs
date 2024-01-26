@@ -62,6 +62,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""f32e3151-6188-4a9c-8e20-d57d9838b972"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -207,6 +216,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cc48aca3-1b5c-4d29-b86b-f24859130f44"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Default Scheme"",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -218,6 +238,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""d53829ab-6271-4618-bc23-020660ee6be6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""51f2578b-eace-4f32-a272-ba3ab9d9129f"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -246,6 +275,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f59e3005-9b20-4d61-924e-1e64e1e36b54"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Default Scheme"",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -257,6 +297,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""name"": ""CloseWindow"",
                     ""type"": ""Button"",
                     ""id"": ""b7a9c4c9-7bd9-494d-96fb-3276fdab0794"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""bceeba00-5e3c-4eb7-8500-7e80f6a38b96"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -285,6 +334,45 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""CloseWindow"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f321b55-d39b-49c4-a107-87c527234a04"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Default Scheme"",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""pause"",
+            ""id"": ""a2c3c9cf-b17d-405b-bb43-9296140fa483"",
+            ""actions"": [
+                {
+                    ""name"": ""Escape"",
+                    ""type"": ""Button"",
+                    ""id"": ""8ef892e9-72fe-4c01-8f8e-ff67b432177e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""08f19ee8-afcf-404a-aac2-71130af608bb"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Default Scheme"",
+                    ""action"": ""Escape"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -303,12 +391,18 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_freeroam_Jump = m_freeroam.FindAction("Jump", throwIfNotFound: true);
         m_freeroam_Look = m_freeroam.FindAction("Look", throwIfNotFound: true);
         m_freeroam_Interact = m_freeroam.FindAction("Interact", throwIfNotFound: true);
+        m_freeroam_Escape = m_freeroam.FindAction("Escape", throwIfNotFound: true);
         // telescope
         m_telescope = asset.FindActionMap("telescope", throwIfNotFound: true);
         m_telescope_Interact = m_telescope.FindAction("Interact", throwIfNotFound: true);
+        m_telescope_Escape = m_telescope.FindAction("Escape", throwIfNotFound: true);
         // memory
         m_memory = asset.FindActionMap("memory", throwIfNotFound: true);
         m_memory_CloseWindow = m_memory.FindAction("CloseWindow", throwIfNotFound: true);
+        m_memory_Escape = m_memory.FindAction("Escape", throwIfNotFound: true);
+        // pause
+        m_pause = asset.FindActionMap("pause", throwIfNotFound: true);
+        m_pause_Escape = m_pause.FindAction("Escape", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -374,6 +468,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_freeroam_Jump;
     private readonly InputAction m_freeroam_Look;
     private readonly InputAction m_freeroam_Interact;
+    private readonly InputAction m_freeroam_Escape;
     public struct FreeroamActions
     {
         private @GameInput m_Wrapper;
@@ -382,6 +477,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_freeroam_Jump;
         public InputAction @Look => m_Wrapper.m_freeroam_Look;
         public InputAction @Interact => m_Wrapper.m_freeroam_Interact;
+        public InputAction @Escape => m_Wrapper.m_freeroam_Escape;
         public InputActionMap Get() { return m_Wrapper.m_freeroam; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -403,6 +499,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @Escape.started += instance.OnEscape;
+            @Escape.performed += instance.OnEscape;
+            @Escape.canceled += instance.OnEscape;
         }
 
         private void UnregisterCallbacks(IFreeroamActions instance)
@@ -419,6 +518,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @Escape.started -= instance.OnEscape;
+            @Escape.performed -= instance.OnEscape;
+            @Escape.canceled -= instance.OnEscape;
         }
 
         public void RemoveCallbacks(IFreeroamActions instance)
@@ -441,11 +543,13 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_telescope;
     private List<ITelescopeActions> m_TelescopeActionsCallbackInterfaces = new List<ITelescopeActions>();
     private readonly InputAction m_telescope_Interact;
+    private readonly InputAction m_telescope_Escape;
     public struct TelescopeActions
     {
         private @GameInput m_Wrapper;
         public TelescopeActions(@GameInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Interact => m_Wrapper.m_telescope_Interact;
+        public InputAction @Escape => m_Wrapper.m_telescope_Escape;
         public InputActionMap Get() { return m_Wrapper.m_telescope; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -458,6 +562,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @Escape.started += instance.OnEscape;
+            @Escape.performed += instance.OnEscape;
+            @Escape.canceled += instance.OnEscape;
         }
 
         private void UnregisterCallbacks(ITelescopeActions instance)
@@ -465,6 +572,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @Escape.started -= instance.OnEscape;
+            @Escape.performed -= instance.OnEscape;
+            @Escape.canceled -= instance.OnEscape;
         }
 
         public void RemoveCallbacks(ITelescopeActions instance)
@@ -487,11 +597,13 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_memory;
     private List<IMemoryActions> m_MemoryActionsCallbackInterfaces = new List<IMemoryActions>();
     private readonly InputAction m_memory_CloseWindow;
+    private readonly InputAction m_memory_Escape;
     public struct MemoryActions
     {
         private @GameInput m_Wrapper;
         public MemoryActions(@GameInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @CloseWindow => m_Wrapper.m_memory_CloseWindow;
+        public InputAction @Escape => m_Wrapper.m_memory_Escape;
         public InputActionMap Get() { return m_Wrapper.m_memory; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -504,6 +616,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @CloseWindow.started += instance.OnCloseWindow;
             @CloseWindow.performed += instance.OnCloseWindow;
             @CloseWindow.canceled += instance.OnCloseWindow;
+            @Escape.started += instance.OnEscape;
+            @Escape.performed += instance.OnEscape;
+            @Escape.canceled += instance.OnEscape;
         }
 
         private void UnregisterCallbacks(IMemoryActions instance)
@@ -511,6 +626,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @CloseWindow.started -= instance.OnCloseWindow;
             @CloseWindow.performed -= instance.OnCloseWindow;
             @CloseWindow.canceled -= instance.OnCloseWindow;
+            @Escape.started -= instance.OnEscape;
+            @Escape.performed -= instance.OnEscape;
+            @Escape.canceled -= instance.OnEscape;
         }
 
         public void RemoveCallbacks(IMemoryActions instance)
@@ -528,6 +646,52 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         }
     }
     public MemoryActions @memory => new MemoryActions(this);
+
+    // pause
+    private readonly InputActionMap m_pause;
+    private List<IPauseActions> m_PauseActionsCallbackInterfaces = new List<IPauseActions>();
+    private readonly InputAction m_pause_Escape;
+    public struct PauseActions
+    {
+        private @GameInput m_Wrapper;
+        public PauseActions(@GameInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Escape => m_Wrapper.m_pause_Escape;
+        public InputActionMap Get() { return m_Wrapper.m_pause; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PauseActions set) { return set.Get(); }
+        public void AddCallbacks(IPauseActions instance)
+        {
+            if (instance == null || m_Wrapper.m_PauseActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_PauseActionsCallbackInterfaces.Add(instance);
+            @Escape.started += instance.OnEscape;
+            @Escape.performed += instance.OnEscape;
+            @Escape.canceled += instance.OnEscape;
+        }
+
+        private void UnregisterCallbacks(IPauseActions instance)
+        {
+            @Escape.started -= instance.OnEscape;
+            @Escape.performed -= instance.OnEscape;
+            @Escape.canceled -= instance.OnEscape;
+        }
+
+        public void RemoveCallbacks(IPauseActions instance)
+        {
+            if (m_Wrapper.m_PauseActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IPauseActions instance)
+        {
+            foreach (var item in m_Wrapper.m_PauseActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_PauseActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public PauseActions @pause => new PauseActions(this);
     private int m_DefaultSchemeSchemeIndex = -1;
     public InputControlScheme DefaultSchemeScheme
     {
@@ -543,13 +707,20 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
     }
     public interface ITelescopeActions
     {
         void OnInteract(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
     }
     public interface IMemoryActions
     {
         void OnCloseWindow(InputAction.CallbackContext context);
+        void OnEscape(InputAction.CallbackContext context);
+    }
+    public interface IPauseActions
+    {
+        void OnEscape(InputAction.CallbackContext context);
     }
 }

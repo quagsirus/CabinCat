@@ -7,6 +7,8 @@ public sealed class Globals
     public Camera ActiveCamera;
     public Cat Cat;
     public Man Man;
+    public float MusicVolume = 0.5f;
+    public float SFXVolume = 0.5f;
     public MemoryManager MemoryManager;
     public event Notify TelescopeActivate;
     public event Notify TelescopeDeactivate;

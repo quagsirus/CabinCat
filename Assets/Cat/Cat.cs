@@ -8,11 +8,9 @@ public class Cat : MonoBehaviour
     [SerializeField] private int moveSpeed = 30000;
     [SerializeField] private Rigidbody camRb;
     [SerializeField] private Transform heldItem;
-    private Vector2 inputRotation;
     [SerializeField] private Transform mouthPosition;
     private Vector3 movementDelta;
     [SerializeField] private Rigidbody rb;
-    private Quaternion targetCameraRotation;
     public GameInput Input;
 
     public Quaternion CameraRotation;

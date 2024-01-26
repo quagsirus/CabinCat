@@ -22,7 +22,6 @@ public class Constellation : MonoBehaviour
     public void Unlock()
     {
         image.color = new Vector4(image.color.r, image.color.g, image.color.b, 0.9f);
-        Debug.Log(image.color.a);
         locked = false;
     }
 }

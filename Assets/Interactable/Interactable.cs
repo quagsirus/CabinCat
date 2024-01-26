@@ -1,5 +1,4 @@
 using System;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,6 +11,8 @@ public class Interactable : MonoBehaviour
 
     private void Interact(InputAction.CallbackContext callbackContext)
     {
+        Debug.Log(Globals.Instance.SFXVolume);
+        Debug.Log(Globals.Instance.MusicVolume);
         switch (interactType)
         {
             case InteractTypes.Undefined:
