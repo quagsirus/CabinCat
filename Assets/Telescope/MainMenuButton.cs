@@ -7,6 +7,6 @@ public class MainMenuButton : MonoBehaviour
 {
     public void MainMenuButtonPressed()
     {
-        SceneManager.LoadScene(SceneManager.GetSceneByBuildIndex(0).name);
+        SceneManager.LoadScene(0);
     }
 }
