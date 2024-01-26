@@ -11,14 +11,14 @@ public class ThirdPersonCamera : MonoBehaviour
     private const int LookSpeed = 100;
 
     private const int MinDistance = 1; // Minimum distance from the pivot
-    private const int MaxDistance = 5; // Maximum distance from the pivot
-    private const int ZoomSpeed = 5; // Speed of zooming
+    private const int MaxDistance = 2; // Maximum distance from the pivot
+    private const int ZoomSpeed = 3; // Speed of zooming
 
     public LayerMask CollisionLayers;
 
     private float GetCurrentDistance()
     {
-        return Vector3.Distance(transform.parent.position, _orbit.position);
+        return Vector3.Distance(transform.position, _orbit.position);
     }
 
     private void Awake()
@@ -34,20 +34,23 @@ public class ThirdPersonCamera : MonoBehaviour
 
         var pivotTransform = transform;
         var orbitTarget = new Vector3(pivotTransform.position.x, pivotTransform.parent.position.y, pivotTransform.position.z);
+        var yAdjustedMaxDistance = Mathf.Clamp(pivotTransform.position.y - orbitTarget.y - 0.75f, 0, MaxDistance) * 3 + MinDistance;
+        Debug.Log(yAdjustedMaxDistance);
+
         _orbit.LookAt(orbitTarget);
 
         if (Physics.Raycast(pivotTransform.parent.position,
-                NewOrbitDistance(MaxDistance, pivotTransform.parent.position) - pivotTransform.parent.position,
+                NewOrbitDistance(yAdjustedMaxDistance, pivotTransform.parent.position) - pivotTransform.parent.position,
                 out var hit,
-                MaxDistance,
+                yAdjustedMaxDistance,
                 CollisionLayers))
         {
-            var newDistance = Mathf.Clamp(hit.distance, MinDistance, MaxDistance);
-            _orbit.position = NewOrbitDistance(newDistance, pivotTransform.parent.position);
+            var newDistance = Mathf.Clamp(hit.distance - 0.4f, MinDistance * 0.2f, yAdjustedMaxDistance);
+            _orbit.position = NewOrbitDistance(newDistance, pivotTransform.position);
         }
         else
         {
-            _orbit.position = NewOrbitDistance(Mathf.Lerp(GetCurrentDistance(), MaxDistance, ZoomSpeed * Time.deltaTime), pivotTransform.parent.position);
+            _orbit.position = NewOrbitDistance(Mathf.Lerp(GetCurrentDistance(), yAdjustedMaxDistance, ZoomSpeed * Time.deltaTime), pivotTransform.position);
         }
     }
 

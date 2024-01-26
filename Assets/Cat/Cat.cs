@@ -5,12 +5,14 @@ public class Cat : MonoBehaviour
 {
     [SerializeField] private int jumpHeight = 10;
     [SerializeField] private int lookSpeed = 10;
-    [SerializeField] private int moveSpeed = 30000;
+    [SerializeField] private int moveSpeed = 5000;
     [SerializeField] private Rigidbody camRb;
     [SerializeField] private Transform heldItem;
     [SerializeField] private Transform mouthPosition;
     private Vector3 movementDelta;
     [SerializeField] private Rigidbody rb;
+    private Quaternion targetCameraRotation;
+    private Animator animator;
     public GameInput Input;
 
     public Quaternion CameraRotation;
@@ -20,12 +22,14 @@ public class Cat : MonoBehaviour
         Input = new GameInput();
         Input.freeroam.Jump.performed += Jump;
         Globals.Instance.Cat = this;
+
+        animator = GetComponent<Animator>();
     }
 
     private void Jump(InputAction.CallbackContext _)
     {
-        //rb.velocity += (Vector3.up * jumpHeight);
         rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
+        animator.Play("rig|Jump");
     }
 
     private void OnEnable()
@@ -42,7 +46,7 @@ public class Cat : MonoBehaviour
     {
         if (movementDelta == Vector3.zero) return;
         rb.AddForce(moveSpeed * movementDelta);
-        var catFaceQuaternion = Quaternion.LookRotation(movementDelta) * Quaternion.Euler(0, -90, 0);;
+        var catFaceQuaternion = Quaternion.LookRotation(movementDelta) * Quaternion.Euler(0, -0, 0);;
         rb.rotation = Quaternion.Lerp(transform.rotation, catFaceQuaternion, Time.fixedDeltaTime * 10);
         movementDelta = Vector3.zero;
     }
@@ -54,6 +58,8 @@ public class Cat : MonoBehaviour
 
         movementDelta += Time.deltaTime * movementInput.x * (CameraRotation * -Vector3.forward) +
                         Time.deltaTime * movementInput.y * (CameraRotation * Vector3.right);
+
+        //animator.SetBool("still", movementDelta == Vector3.zero);
     }
 
     public bool HoldItem(Transform item)
