@@ -25,6 +25,7 @@ public class Interactable : MonoBehaviour
                     collider.enabled = false;
                     transform.parent.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
                     OnTriggerExit(null);
+                    audioSource.volume = Globals.Instance.SFXVolume;
                     audioSource.Play();
                 }
                 break;
