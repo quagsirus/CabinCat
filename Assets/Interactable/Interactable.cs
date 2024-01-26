@@ -8,6 +8,7 @@ public class Interactable : MonoBehaviour
     public Cutscenes memoryToShow = Cutscenes.Undefined;
     [SerializeField] private Collider collider;
     [SerializeField] private Transform promptTransform;
+    [SerializeField] private AudioSource audioSource;
 
     private void Interact(InputAction.CallbackContext callbackContext)
     {
@@ -24,8 +25,8 @@ public class Interactable : MonoBehaviour
                     collider.enabled = false;
                     transform.parent.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
                     OnTriggerExit(null);
+                    audioSource.Play();
                 }
-
                 break;
             case InteractTypes.OldMan:
                 Debug.Log("INFO: Cat Interacted With Man");
@@ -64,6 +65,7 @@ public class Interactable : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("asdfdgh" + other.name);
         if (!other.CompareTag("Cat")) return;
         Debug.Log("INFO: Entered Trigger Zone Of " + transform.parent.gameObject.name);
         Globals.Instance.Cat.Input.freeroam.Interact.performed += Interact;
