@@ -17,6 +17,7 @@ public class Cat : MonoBehaviour
     public GameInput Input;
 
     public Quaternion CameraRotation;
+    private static int _still;
 
     private void Awake()
     {
@@ -25,6 +26,7 @@ public class Cat : MonoBehaviour
         Globals.Instance.Cat = this;
 
         animator = GetComponent<Animator>();
+        _still = Animator.StringToHash("still");
     }
 
     private void Jump(InputAction.CallbackContext _)
@@ -60,7 +62,7 @@ public class Cat : MonoBehaviour
         movementDelta += Time.deltaTime * movementInput.x * (CameraRotation * -Vector3.forward) +
                         Time.deltaTime * movementInput.y * (CameraRotation * Vector3.right);
 
-        animator.SetBool("still", movementDelta == Vector3.zero);
+        animator.SetBool(_still, movementDelta == Vector3.zero);
     }
 
     public bool HoldItem(Transform item, float itemOffset = 0f, float rotationOffsetX = 0f)
