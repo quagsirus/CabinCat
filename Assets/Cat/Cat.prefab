@@ -21294,6 +21294,7 @@ GameObject:
   - component: {fileID: 5733378778056833372}
   - component: {fileID: 8337864662027360269}
   - component: {fileID: 2669156525567039167}
+  - component: {fileID: 2096685726655933825}
   m_Layer: 2
   m_Name: Mesh
   m_TagString: Cat
@@ -22154,6 +22155,27 @@ CapsuleCollider:
   m_Height: 0.045
   m_Direction: 1
   m_Center: {x: -0.00028114583, y: 0, z: -0.003}
+--- !u!65 &2096685726655933825
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5256240555391064401}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.009, y: 0.04, z: 0.03}
+  m_Center: {x: 0, y: 0, z: -0.0025}
 --- !u!1 &5256497574125483771
 GameObject:
   m_ObjectHideFlags: 0
