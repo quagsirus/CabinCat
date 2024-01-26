@@ -14,11 +14,18 @@ public sealed class Globals
     public event Notify TelescopeDeactivate;
     public event Notify ItemGivenToMan;
     public event Notify ItemPickedUp;
+    public event Notify CutsceneStart;
+    public event Notify CutsceneStop;
+
+    public void StartCutscene()
+    {
+        CutsceneStart?.Invoke();
+    }
+
     public void InteractedWithTelescope()
     {
         TelescopeActivate?.Invoke();
     }
-
     public void UninteractedWithTelescope()
     {
         TelescopeDeactivate?.Invoke();
@@ -27,7 +34,6 @@ public sealed class Globals
     {
         ItemPickedUp?.Invoke();
     }
-
     public void ItemPresented()
     {
         ItemGivenToMan?.Invoke();

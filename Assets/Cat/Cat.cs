@@ -8,7 +8,7 @@ public class Cat : MonoBehaviour
     [SerializeField] private int lookSpeed = 10;
     [SerializeField] private int moveSpeed = 5000;
     [SerializeField] private Rigidbody camRb;
-    [SerializeField] private Transform heldItem;
+    public Transform HeldItem;
     [SerializeField] private Transform mouthPosition;
     private Vector3 movementDelta;
     [SerializeField] private Rigidbody rb;
@@ -67,7 +67,7 @@ public class Cat : MonoBehaviour
 
     public bool HoldItem(Transform item, float itemOffset = 0f, float upwardsOffset = 0f, float rotationOffsetX = 0f, float rotationOffsetY = 0f, float rotationOffsetZ = 0f)
     {
-        if (heldItem != null) return false;
+        if (HeldItem != null) return false;
         item.position = mouthPosition.position;
         item.position += transform.forward * itemOffset; 
         item.position += transform.up * upwardsOffset; 
@@ -76,18 +76,18 @@ public class Cat : MonoBehaviour
         Globals.Instance.ItemCollected();
         var rotateScript = item.GetComponent<RotateObject>();
         if (rotateScript != null) rotateScript.Cancel();
-        heldItem = item;
+        HeldItem = item;
         return true;
     }
 
     public bool GiveItem()
     {
-        if (heldItem == null) return false;
-        var storedMemory = heldItem.GetChild(0).GetComponent<Interactable>().memoryToShow;
+        if (HeldItem == null) return false;
+        var storedMemory = HeldItem.GetChild(0).GetComponent<Interactable>().memoryToShow;
         if (storedMemory != Cutscenes.Undefined) Globals.Instance.MemoryManager.DisplayMemory(storedMemory);
         Globals.Instance.ItemPresented();
-        Destroy(heldItem.gameObject);
-        heldItem = null;
+        Destroy(HeldItem.gameObject);
+        HeldItem = null;
         return true;
     }
 }

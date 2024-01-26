@@ -38,9 +38,10 @@ public class Interactable : MonoBehaviour
                 break;
             case InteractTypes.OldMan:
                 Debug.Log("INFO: Cat Interacted With Man");
-                Globals.Instance.Man.SetText(Globals.Instance.Cat.GiveItem()
+                /*Globals.Instance.Man.SetText(Globals.Instance.Cat.GiveItem()
                     ? "Thanks for the brick lil feller"
-                    : "I have a longing for bricks");
+                    : "I have a longing for bricks");*/
+                Globals.Instance.Cat.GiveItem();
                 break;
             case InteractTypes.Telescope:
                 Debug.Log("INFO: Cat Interacted With Telescope");

@@ -43,9 +43,10 @@ public class MemoryManager : MonoBehaviour
 public enum Cutscenes
 {
     Undefined,
-    Box,
-    Flower,
     Fish,
-    Book,
-    Polaroid
+    Flower,
+    Box,
+    Bauble,
+    Polaroid,
+    Shoe
 }

@@ -6,13 +6,9 @@ using UnityEngine.UI;
 public class Constellation : MonoBehaviour
 {
     [SerializeField] private Cutscenes cutscene = Cutscenes.Undefined;
-    [SerializeField] private Image image;
+    [SerializeField] private RawImage image;
+    [SerializeField] private Texture unlockedImage;
     [SerializeField] bool locked = true;
-
-    private void Start()
-    {
-        image.color = new Vector4(image.color.r, image.color.g, image.color.b, 0.4f);
-    }
 
     public void Clicked()
     {
@@ -21,7 +17,7 @@ public class Constellation : MonoBehaviour
 
     public void Unlock()
     {
-        image.color = new Vector4(image.color.r, image.color.g, image.color.b, 0.9f);
+        image.texture = unlockedImage;
         locked = false;
     }
 }
