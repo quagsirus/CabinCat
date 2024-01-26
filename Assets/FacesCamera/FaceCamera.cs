@@ -8,6 +8,9 @@ public class FaceCamera : MonoBehaviour
     private void Update()
     {
         if (_camera != null) transform.LookAt(_camera.transform);
-        else transform.LookAt(Globals.Instance.ActiveCamera.transform.position);
+        else if (Globals.Instance.ActiveCamera!= null)
+        {
+            transform.LookAt(Globals.Instance.ActiveCamera.transform.position);
+        }
     }
 }

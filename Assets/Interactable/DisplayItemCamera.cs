@@ -5,24 +5,28 @@ using UnityEngine;
 public class DisplayItemCamera : MonoBehaviour
 {
     [SerializeField] private Camera _camera;
+    [SerializeField] private GameObject cutscenePrompt;
 
 
-    private void Start()
+    private void Awake()
     {
         Globals.Instance.CutsceneStart += SwapCameraToCutscene;
         Globals.Instance.CutsceneStop += SwapCameraToFreeroam;
-
+        cutscenePrompt.SetActive(false);
     }
 
     private void SwapCameraToCutscene()
     {
         Globals.Instance.ActiveCamera.enabled = false;
-        _camera.enabled = true;
+        transform.GetComponent<Camera>().enabled = true;
+        cutscenePrompt.SetActive(true);
+        
     }
 
     private void SwapCameraToFreeroam()
     {
-        _camera.enabled = false;
+        transform.GetComponent<Camera>().enabled = false;
         Globals.Instance.ActiveCamera.enabled = true;
+        cutscenePrompt.SetActive(false);
     }
 }
