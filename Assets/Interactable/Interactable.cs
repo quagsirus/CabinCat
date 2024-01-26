@@ -42,6 +42,8 @@ public class Interactable : MonoBehaviour
                     ? "Thanks for the brick lil feller"
                     : "I have a longing for bricks");*/
                 Globals.Instance.Cat.GiveItem();
+                Globals.Instance.Cat.Input.freeroam.Interact.performed -= Interact;
+                if (promptTransform != null) promptTransform.gameObject.SetActive(false);
                 break;
             case InteractTypes.Telescope:
                 Debug.Log("INFO: Cat Interacted With Telescope");
