@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Man : MonoBehaviour
 {
-    [SerializeField] private readonly float textDisplayLength = 5f;
-    private bool displayingText;
+    [SerializeField] private float textDisplayLength = 5f;
+    [SerializeField] private bool displayingText;
     [SerializeField] private TextMeshPro textDisplay;
     [SerializeField] private float textDuration; 
 
@@ -15,11 +15,12 @@ public class Man : MonoBehaviour
         textDisplay.enabled = false;
     }
 
-    public void SetText(string text)
+    public bool SetText(string text)
     {
-        if (displayingText) return;
+        if (displayingText) return false;
         StartCoroutine(UpdateText(text));
         StartCoroutine(HideTextDelay());
+        return true;
     }
 
     public IEnumerator HideTextDelay()

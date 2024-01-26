@@ -7,6 +7,7 @@ public sealed class Globals
     public Camera ActiveCamera;
     public Cat Cat;
     public Man Man;
+    public bool ObjectiveComplete = false;
     public float MusicVolume = 0.5f;
     public float SFXVolume = 0.5f;
     public MemoryManager MemoryManager;
@@ -21,6 +22,10 @@ public sealed class Globals
     {
         CutsceneStart?.Invoke();
     }
+
+    public void StopCutscene() {
+        CutsceneStop?.Invoke();    
+        }
 
     public void InteractedWithTelescope()
     {

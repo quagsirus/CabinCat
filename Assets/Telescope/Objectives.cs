@@ -27,6 +27,7 @@ public class Objectives : MonoBehaviour
     {
         itemsPresented++;
         UpdateDisplay();
+        if (itemsPresented == totalItems) Globals.Instance.ObjectiveComplete = true;
     }
 
     private void UpdateDisplay()

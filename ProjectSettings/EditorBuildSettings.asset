@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/MainMenu.unity
     guid: 9dd310edf393c6f4291dd29e2b48f0ab
   - enabled: 1
-    path: Assets/Jakes.unity
-    guid: 93d806eb0daa96d4c9e747b27ecefda2
+    path: Assets/Cabin.unity
+    guid: fd2d21db6f78ea6409fd6d8309b5f914
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
