@@ -17,6 +17,24 @@ public class TelescopeImages : MonoBehaviour
         Hide();
     }
 
+    private void OnDestroy()
+    {
+        Globals.Instance.TelescopeDeactivate -= Hide;
+        Globals.Instance.TelescopeActivate -= Show;
+    }
+
+    private void OnDisable()
+    {
+        Globals.Instance.TelescopeDeactivate -= Hide;
+        Globals.Instance.TelescopeActivate -= Show;
+    }
+
+    private void OnEnable()
+    {
+        Globals.Instance.TelescopeDeactivate += Hide;
+        Globals.Instance.TelescopeActivate += Show;        
+    }
+
     private void Awake()
     {
         Globals.Instance.Cat.Input.telescope.Interact.performed += HideOnInteract;

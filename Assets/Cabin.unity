@@ -1289,6 +1289,10 @@ PrefabInstance:
       propertyPath: totalItems
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 3046414327930116221, guid: f282a21e30e7ff94b8992343105971b1, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4460019874172328065, guid: f282a21e30e7ff94b8992343105971b1, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
@@ -4298,7 +4302,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1429878603}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1429878606
 Camera:
   m_ObjectHideFlags: 0
@@ -4306,7 +4310,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1429878603}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -7184,7 +7188,8 @@ PrefabInstance:
       value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 65702495048144492, guid: c8c936a1a9d52734da5c3b1ae273cae6, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -9007114647813300453, guid: c8c936a1a9d52734da5c3b1ae273cae6, type: 3}
       insertIndex: -1

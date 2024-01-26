@@ -19,6 +19,32 @@ public class PawsMenu : MonoBehaviour
         Globals.Instance.Cat.Input.pause.Escape.performed += Activated;
     }
 
+    private void OnDestroy()
+    {
+        Globals.Instance.Cat.Input.freeroam.Escape.performed -= Activated;
+        Globals.Instance.Cat.Input.telescope.Escape.performed -= Activated;
+        Globals.Instance.Cat.Input.memory.Escape.performed -= Activated;
+        Globals.Instance.Cat.Input.pause.Escape.performed -= Activated;
+    }
+
+    private void OnDisable()
+    {
+        Globals.Instance.Cat.Input.freeroam.Escape.performed -= Activated;
+        Globals.Instance.Cat.Input.telescope.Escape.performed -= Activated;
+        Globals.Instance.Cat.Input.memory.Escape.performed -= Activated;
+        Globals.Instance.Cat.Input.pause.Escape.performed -= Activated;
+    }
+
+    private void OnEnable()
+    {
+        Globals.Instance.Cat.Input.freeroam.Escape.performed += Activated;
+        Globals.Instance.Cat.Input.telescope.Escape.performed += Activated;
+        Globals.Instance.Cat.Input.memory.Escape.performed += Activated;
+        Globals.Instance.Cat.Input.pause.Escape.performed += Activated;     
+    }
+
+
+
     private void Activated(InputAction.CallbackContext _)
     {
         if (paused) UnPause();

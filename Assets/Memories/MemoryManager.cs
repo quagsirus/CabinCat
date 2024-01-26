@@ -165,7 +165,7 @@ public class Cutscene
         memoryManager.CloseMemory(_);
         index = 0;
         Globals.Instance.Cat.Input.memory.CloseWindow.performed -= Return;
-        if (cutsceneName == Cutscenes.Fin) SceneManager.LoadScene(SceneManager.GetSceneByBuildIndex(0).name);
+        if (cutsceneName == Cutscenes.Fin) SceneManager.LoadScene(0);
     }
 }
 }
