@@ -65,13 +65,14 @@ public class Cat : MonoBehaviour
         animator.SetBool(_still, movementDelta == Vector3.zero);
     }
 
-    public bool HoldItem(Transform item, float itemOffset = 0f, float rotationOffsetX = 0f)
+    public bool HoldItem(Transform item, float itemOffset = 0f, float upwardsOffset = 0f, float rotationOffsetX = 0f, float rotationOffsetY = 0f, float rotationOffsetZ = 0f)
     {
         if (heldItem != null) return false;
         item.position = mouthPosition.position;
-        item.position += item.forward * itemOffset; 
+        item.position += transform.forward * itemOffset; 
+        item.position += transform.up * upwardsOffset; 
         item.SetParent(mouthPosition);
-        item.rotation = mouthPosition.rotation * Quaternion.Euler(rotationOffsetX, 0, 0);
+        item.rotation = mouthPosition.rotation * Quaternion.Euler(rotationOffsetX, rotationOffsetY, rotationOffsetZ);
         Globals.Instance.ItemCollected();
         var rotateScript = item.GetComponent<RotateObject>();
         if (rotateScript != null) rotateScript.Cancel();
