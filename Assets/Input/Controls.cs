@@ -29,13 +29,22 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             ""id"": ""0df58802-1a79-4890-af28-146ebb15abd0"",
             ""actions"": [
                 {
-                    ""name"": ""New action"",
+                    ""name"": ""move"",
                     ""type"": ""Value"",
                     ""id"": ""50df78f2-7845-4433-86d3-6cf5a0398375"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""2acb38c3-e9bb-4a4c-9cc6-572208e9ae1a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -46,7 +55,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""move"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -57,7 +66,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -68,7 +77,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -79,7 +88,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -90,9 +99,20 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e08f3a8-cef7-404d-bccb-ea2a8ce5c6af"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -101,7 +121,8 @@ public partial class @Controls: IInputActionCollection2, IDisposable
 }");
         // freeroam
         m_freeroam = asset.FindActionMap("freeroam", throwIfNotFound: true);
-        m_freeroam_Newaction = m_freeroam.FindAction("New action", throwIfNotFound: true);
+        m_freeroam_move = m_freeroam.FindAction("move", throwIfNotFound: true);
+        m_freeroam_jump = m_freeroam.FindAction("jump", throwIfNotFound: true);
     }
 
     ~@Controls()
@@ -168,12 +189,14 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     // freeroam
     private readonly InputActionMap m_freeroam;
     private List<IFreeroamActions> m_FreeroamActionsCallbackInterfaces = new List<IFreeroamActions>();
-    private readonly InputAction m_freeroam_Newaction;
+    private readonly InputAction m_freeroam_move;
+    private readonly InputAction m_freeroam_jump;
     public struct FreeroamActions
     {
         private @Controls m_Wrapper;
         public FreeroamActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Newaction => m_Wrapper.m_freeroam_Newaction;
+        public InputAction @move => m_Wrapper.m_freeroam_move;
+        public InputAction @jump => m_Wrapper.m_freeroam_jump;
         public InputActionMap Get() { return m_Wrapper.m_freeroam; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -183,16 +206,22 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_FreeroamActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_FreeroamActionsCallbackInterfaces.Add(instance);
-            @Newaction.started += instance.OnNewaction;
-            @Newaction.performed += instance.OnNewaction;
-            @Newaction.canceled += instance.OnNewaction;
+            @move.started += instance.OnMove;
+            @move.performed += instance.OnMove;
+            @move.canceled += instance.OnMove;
+            @jump.started += instance.OnJump;
+            @jump.performed += instance.OnJump;
+            @jump.canceled += instance.OnJump;
         }
 
         private void UnregisterCallbacks(IFreeroamActions instance)
         {
-            @Newaction.started -= instance.OnNewaction;
-            @Newaction.performed -= instance.OnNewaction;
-            @Newaction.canceled -= instance.OnNewaction;
+            @move.started -= instance.OnMove;
+            @move.performed -= instance.OnMove;
+            @move.canceled -= instance.OnMove;
+            @jump.started -= instance.OnJump;
+            @jump.performed -= instance.OnJump;
+            @jump.canceled -= instance.OnJump;
         }
 
         public void RemoveCallbacks(IFreeroamActions instance)
@@ -212,6 +241,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     public FreeroamActions @freeroam => new FreeroamActions(this);
     public interface IFreeroamActions
     {
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnMove(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
 }
